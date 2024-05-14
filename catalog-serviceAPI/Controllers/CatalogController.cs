@@ -54,7 +54,7 @@ public class CatalogController : ControllerBase
     public async Task<ActionResult<List<Product>>> GetAllProducts()
     {
 
-        _logger.LogInformation("Metode GetProduct called at {DT}", DateTime.UtcNow.ToLongTimeString());
+        _logger.LogInformation("Metode GetAllProduct called at {DT}", DateTime.UtcNow.ToLongTimeString());
 
         var list = await _catalogRepo.GetAllProducts();
         return Ok(list);
@@ -62,12 +62,14 @@ public class CatalogController : ControllerBase
     [HttpPut("UpdateProduct")]
 public async Task<IActionResult> UpdateProduct(int ProductID,Product product)
     {
-        _logger.LogInformation("Metode GetProduct called at {DT}", DateTime.UtcNow.ToLongTimeString());
+        _logger.LogInformation("Metode UpdateProduct called at {DT}", DateTime.UtcNow.ToLongTimeString());
+     //finds the product
      var exists = await _catalogRepo.GetProduct(ProductID);
          if (exists == null)
      {    
         return NotFound();
     }
+    //updates the product
     await _catalogRepo.UpdateProduct(ProductID, product);
         return Ok();
     }

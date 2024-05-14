@@ -1,3 +1,0 @@
-export connectionString=mongodb://admin:1234@localhost:27017/
-export database=catalogDB
-export collection=catalogCol
