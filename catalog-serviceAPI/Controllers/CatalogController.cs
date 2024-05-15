@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace catalogServiceAPI.Controllers
 {
-    // controllerklasse til håndtering af HTTP-anmodninger relateret til katalogtjenester
+    // kontrollerklasse til håndtering af HTTP-anmodninger relateret til katalogtjenester
     [ApiController]
     [Route("[controller]")]
     public class CatalogController : ControllerBase
