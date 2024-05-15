@@ -12,9 +12,9 @@ public class CatalogController : ControllerBase
 {
     private readonly ILogger<CatalogController> _logger;
     public readonly IConfiguration _config;
-    private readonly IProductRepository _catalogRepo;
+    private readonly ICatalogRepository _catalogRepo;
 
-    public CatalogController(ILogger<CatalogController> logger, IConfiguration configuration, IProductRepository catalogRepository)
+    public CatalogController(ILogger<CatalogController> logger, IConfiguration configuration, ICatalogRepository catalogRepository)
     {
         _logger = logger;
         _catalogRepo = catalogRepository;
