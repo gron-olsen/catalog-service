@@ -1,29 +1,46 @@
 using catalogServiceAPI.Services;
 using catalogServiceAPI.Models;
+using NLog;
+using NLog.Web;
 
-var builder = WebApplication.CreateBuilder(args);
+var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+logger.Debug("init main");
 
-// Add services to the container.
+try
+{
+    var builder = WebApplication.CreateBuilder(args);
 
+    // Tilføj NLog
+    builder.Logging.ClearProviders();
+    builder.Host.UseNLog();
 
-builder.Services.AddSingleton<ICatalogRepository, CatalogRepository>();
+    // Add services to the container.
+    builder.Services.AddSingleton<ICatalogRepository, CatalogRepository>();
+    builder.Services.AddControllers();
 
-builder.Services.AddControllers();
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+    var app = builder.Build();
 
-var app = builder.Build();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 
-app.UseSwagger();
-app.UseSwaggerUI();
+    app.UseHttpsRedirection();
 
+    app.UseAuthorization();
 
-app.UseHttpsRedirection();
+    app.MapControllers();
 
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+    app.Run();
+}
+catch (Exception ex)
+{
+    logger.Error(ex, "Stopped program because of exception");
+    throw;
+}
+finally
+{
+    NLog.LogManager.Shutdown();
+}
