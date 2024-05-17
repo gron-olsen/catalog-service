@@ -3,6 +3,8 @@ using catalogServiceAPI.Models;
 using catalogServiceAPI.Services;
 using MongoDB.Driver;
 using System.Linq;
+using System.Diagnostics;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace catalogServiceAPI.Controllers;
 
@@ -82,4 +84,33 @@ public async Task<IActionResult> UpdateProduct(int ProductID,Product product)
         _catalogRepo.DeleteProduct(id);
         return Ok();
     }
+
+
+
+
+
+    // Semantisk Get starter her!
+    [HttpGet("Variant")]
+    public Dictionary<string, string> GetVersion()
+    {
+        var properties = new Dictionary<string, string>();
+        var assembly = typeof(Program).Assembly;
+
+        properties.Add("service", "Catalog");
+        var ver = System.Diagnostics.FileVersionInfo.GetVersionInfo(typeof(Program).Assembly.Location).FileVersion ?? "Undefined";
+        Console.WriteLine($"Version before: {ver}");
+        properties.Add("version",ver);
+
+        var feature = HttpContext.Features.Get<IHttpConnectionFeature>();
+        var localIPAddr = feature?.LocalIpAddress?.ToString() ?? "N/A";
+        properties.Add("local-host-address", localIPAddr);
+
+        return properties;
+    }
+
+
+
+
+
+
 }

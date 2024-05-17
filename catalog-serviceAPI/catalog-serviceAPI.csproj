@@ -5,9 +5,26 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>catalog_serviceAPI</RootNamespace>
+
+    <Company>Grøn og Olsen</Company>
+    <Authors>Gruppe 432</Authors>
+    <Copyright>Gruppe 432</Copyright>
+    
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <InformationalVersion>1.0.0</InformationalVersion>
+    
+    <Description>
+      1.0.0 Updated with semantic versioning
+      0.9.0 Dockerfile Service Added to App
+    </Description>
+
+
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="mongodb.bson" Version="2.25.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.2.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.25.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
