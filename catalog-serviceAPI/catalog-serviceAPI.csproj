@@ -9,7 +9,13 @@
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="2.25.0" />
+    <PackageReference Include="Nlog" Version="5.3.2" />
+    <PackageReference Include="NLog.targets.Loki" Version="2.2.0" />
+    <PackageReference Include="Nlog.Web.AspNetCore" Version="5.3.11" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+     <None Include="NLog.config">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
   </ItemGroup>
 
 </Project>
