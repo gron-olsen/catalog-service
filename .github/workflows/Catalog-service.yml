@@ -28,4 +28,4 @@ jobs:
     - name: Push Docker image
       run: |
         docker tag Catalog-servieP marke01/Catalog-servicep:latest
-        docker push marke01/Catalog-service:latestp
+        docker push marke01/Catalog-service:latest
