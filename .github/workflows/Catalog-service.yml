@@ -21,9 +21,9 @@ jobs:
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - name: Build Docker image
-        run: docker build . -f catalog-serviceAPI/dockerfile -t ${DOCKER_USER}/catalog-service:latest  
+        run: docker build . -f catalog-serviceAPI/dockerfile --tag ${DOCKER_USER}/catalog-service:latest  
 
       - name: Push Docker image
         run: |
-          docker tag catalog-service marke01/catalog-service:latest
-          docker push marke01/catalog-service:latest
+          docker tag catalog-service ${DOCKER_USER}/catalog-service:latest
+          docker push ${DOCKER_USER}catalog-service:latest
