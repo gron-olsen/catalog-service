@@ -7,25 +7,25 @@ on:
     branches: [ "develop" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Login to Docker Hub
-      env:
-        DOCKER_USER: ${{ secrets.DOCKER_USER }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Login to Docker Hub
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
-    - name: Build Docker image
-      run: docker build -t catalog-serviceAPI .
+      - name: Build Docker image
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        run: docker build . -f catalog-serviceAPI/dockerfile --tag ${DOCKER_USER}/catalog-service:latest  
 
-    - name: Push Docker image
-      run: |
-        docker tag Catalog-servieP marke01/Catalog-servicep:latest
-        docker push marke01/Catalog-service:latest
+      - name: Push Docker image
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        run: docker push ${DOCKER_USER}/catalog-service:latest
