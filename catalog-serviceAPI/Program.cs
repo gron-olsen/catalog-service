@@ -13,6 +13,7 @@ try
     // Tilføj NLog
     builder.Logging.ClearProviders();
     builder.Host.UseNLog();
+    builder.Services.AddHttpClient();
 
     // Add services to the container.
     builder.Services.AddSingleton<ICatalogRepository, CatalogRepository>();
