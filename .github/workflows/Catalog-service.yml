@@ -26,6 +26,8 @@ jobs:
         run: docker build . -f catalog-serviceAPI/dockerfile --tag ${DOCKER_USER}/catalog-service:latest  
 
       - name: Push Docker image
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
         run: |
           docker tag catalog-service ${DOCKER_USER}/catalog-service:latest
-          docker push ${DOCKER_USER}catalog-service:latest
+          docker push ${DOCKER_USER}/catalog-service:latest
