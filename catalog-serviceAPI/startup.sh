@@ -6,3 +6,5 @@ export collection="catalogCol"
 export connAuk="http://localhost:5289"
 echo $database $collection $connectionString
 dotnet run server="$server" port="$port"
+#chmod +x ./startup.sh
+#./startup.sh
