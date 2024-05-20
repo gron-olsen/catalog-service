@@ -21,7 +21,7 @@ jobs:
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - name: Build Docker image
-        run: docker build -t ${DOCKER_USER}/catalog-service -f catalog-serviceAPI/Dockerfile .
+        run: docker build . -f catalog-serviceAPI/dockerfile -t ${DOCKER_USER}/catalog-service:latest  
 
       - name: Push Docker image
         run: |
