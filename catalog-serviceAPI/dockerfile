@@ -2,9 +2,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 8080
 
-# Install wget
-RUN apt-get update && apt-get install -y wget
-
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY ["catalog-serviceAPI.csproj", "./"]
@@ -18,5 +15,5 @@ RUN dotnet publish "catalog-serviceAPI.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "catalog-serviceAPI.dll"]
+COPY --from=publish /app/publish /app
+ENTRYPOINT ["dotnet", "/app/catalog-serviceAPI.dll"]
