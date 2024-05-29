@@ -7,6 +7,8 @@ services:
     image: grafana/loki:latest
     ports:
       - "3100:3100"
+    volumes:
+      - ./loki-data:/loki
     command: -config.file=/etc/loki/local-config.yaml
     networks:
       - loki
@@ -64,5 +66,5 @@ services:
 
 volumes:
   mongodbdata:
-
+  loki-data:
 
